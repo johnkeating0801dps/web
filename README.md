@@ -12,3 +12,23 @@ Eclipse:
 
 Open `http://localhost:8080/student-web/` and submit a name.
 Requires JDK 17, Maven, and Tomcat 9. The servlet API is `provided` because Tomcat supplies it.
+
+
+
+for docker web
+
+
+FROM tomcat:9.0-jdk17-temurin
+
+# Remove default Tomcat applications
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+# Copy WAR file into Tomcat
+COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+
+# Expose Tomcat port
+EXPOSE 8080
+
+# Start Tomcat
+CMD ["catalina.sh", "run"]
+
